@@ -8,6 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * *وظيفته التحقق من الشخص الذي يريد تغيير كلمة المرور
      */
     public function up(): void
     {

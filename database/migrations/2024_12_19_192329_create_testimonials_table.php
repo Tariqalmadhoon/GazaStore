@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
-            $table->string('path');
-            $table->enum('type',['main','gallery'])->default('main');
-            $table->morphs('imageable'); //بيعمل اسم الحقل مع id ومع نوعه
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->text('comment');
 
             $table->timestamps();
         });
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('testimonials');
     }
 };

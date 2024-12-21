@@ -9,15 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+     //الجدول الوسيط ليس مودل بل جدول
     public function up(): void
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->id();
-            $table->string('path');
-            $table->enum('type',['main','gallery'])->default('main');
-            $table->morphs('imageable'); //بيعمل اسم الحقل مع id ومع نوعه
-
-            $table->timestamps();
+        Schema::create('permission_role', function (Blueprint $table) {
+            $table->foreignId('permission_id')->constrained('permissions')->cascadeOnDelete();
+            $table->foreignId('role_id')->constrained('roles')->cascadeOnDelete();
         });
     }
 
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('permission_role');
     }
 };

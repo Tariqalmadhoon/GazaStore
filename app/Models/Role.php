@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Role extends Model
 {
     use HasFactory;
     protected $guarded=[];
 
-    function imageable(){
-        return $this->morphTo();
+    function users(){
+        return $this->hasMany(User::class);
+    }
+
+    function permissions(){
+        return $this->belongsToMany(Permission::class);
     }
 }
 
-//لجعل المودل يدخل على الاتا بيز من دوم مشكلة

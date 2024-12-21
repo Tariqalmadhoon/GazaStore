@@ -9,6 +9,25 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded=[];
-}
 
-//لجعل المودل يدخل على الاتا بيز من دوم مشكلة
+    function category(){
+        return $this->belongsTo(Category::class)->withDefault();
+    }
+
+    //الصورة الاساسية
+     function image(){
+        return $this->morphOne(Image::class,'imageable')->where('type','main');
+     }
+//الالبوم
+    function gallery(){
+        return $this->morphMany(Image::class ,'imageable');
+    }
+
+    function reviews(){
+        return $this->hasMany(Review::class);
+    }
+
+    function order_details(){
+        return $this->hasMany(OrderDetail::class);
+    }
+}
